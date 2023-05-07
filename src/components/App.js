@@ -1,37 +1,53 @@
 import { Component } from "react";
-import { UsersList } from './UersList';
-import { data } from '../data/data';
-import { AddUserForm } from './AddUserForm';
-import { nanoid } from "nanoid";
+import { Statistics } from './statistics/Statistics';
+import { FeedbackOptions } from './feedback/FeedbackOptions';
+import { Section } from './section/Section';
+import { Notification } from './notification/Notification';
 
 export class App extends Component {
 
-state = { users: data };
+    state = {
+      good: 0,
+      neutral: 0,
+      bad: 0,
+    };
   
-  deleteUser = (id) => {
-    this.setState((prevstate) => {
-     return {users: prevstate.users.filter((user) => user.id!==id)}
-    })
-  }
-
-  addContact = (userData) => {
-    const newUser = { ...userData, id: nanoid() }
-    this.setState(
-      (prevstate) => {
-        return { users: [...prevstate.users, newUser] }
+  updateState = propertyState => {
+    this.setState(prevState => (
+      {
+      [propertyState]: prevState[propertyState] + 1
       }
-    )
-  }
-  
-    render() {
+    ))
+  };
 
-      const { users } = this.state;
+  countTotalFeedback = (good, neutral, bad) => good + neutral + bad;
+  countPositiveFeedbackPercentage = (good, total) => Math.round(good / total * 100);
+  
+  render() {
+
+    const { good, neutral, bad } = this.state;
+    let total = this.countTotalFeedback(good, neutral, bad);
+    let positivePercentage = this.countPositiveFeedbackPercentage(good, total);
+
       return (
         <>
-          <UsersList users={users} deleteUser={this.deleteUser} />
-          <AddUserForm addContact={this.addContact} />
+          <Section title="Please leave feedback">
+            <FeedbackOptions updateState={this.updateState} /> 
+          </Section>
+          
+          <Section title="Statistics" >
+            {total > 0 ?
+              <Statistics
+                  good={good}
+                  neutral={neutral}
+                  bad={bad}
+                  total={total}
+                  positivePercentage={positivePercentage}
+              /> :
+              <Notification message="There is no feedback" />
+            }
+          </Section>
         </>
       );
     }
   }
-  

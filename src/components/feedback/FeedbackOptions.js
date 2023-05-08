@@ -1,4 +1,5 @@
 import css from './FeedbackOptions.module.css';
+import PropTypes from 'prop-types';
 
 export const FeedbackOptions = ({ updateState }) => {
 
@@ -10,3 +11,7 @@ export const FeedbackOptions = ({ updateState }) => {
         </>
     )
 }
+
+FeedbackOptions.propTypes = {
+    updateState: PropTypes.func.isRequired
+};

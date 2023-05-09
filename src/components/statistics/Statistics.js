@@ -11,7 +11,6 @@ export const Statistics = ({ good, neutral, bad, total, positivePercentage }) =>
             <p className={css.statistic}>Total: {total}</p>
             <p className={css.statistic}>Positive feedback: {positivePercentage}%</p>
         </>
-        
     )
 }
 

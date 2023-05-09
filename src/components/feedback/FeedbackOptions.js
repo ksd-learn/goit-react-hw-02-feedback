@@ -2,7 +2,6 @@ import css from './FeedbackOptions.module.css';
 import PropTypes from 'prop-types';
 
 export const FeedbackOptions = ({ updateState }) => {
-
     return (
         <>
             <button className={css.btn} onClick={() => {updateState("good")}}>Good</button>

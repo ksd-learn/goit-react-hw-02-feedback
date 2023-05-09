@@ -6,11 +6,11 @@ import { Notification } from './notification/Notification';
 
 export class App extends Component {
 
-    state = {
-      good: 0,
-      neutral: 0,
-      bad: 0,
-    };
+  state = {
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  };
   
   updateState = propertyState => {
     this.setState(prevState => (
@@ -32,7 +32,7 @@ export class App extends Component {
       return (
         <>
           <Section title="Please leave feedback">
-            <FeedbackOptions updateState={this.updateState} /> 
+            <FeedbackOptions options={'2'}  updateState={this.updateState} /> 
           </Section>
           
           <Section title="Statistics" >

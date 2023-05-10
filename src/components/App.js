@@ -28,11 +28,12 @@ export class App extends Component {
     const { good, neutral, bad } = this.state;
     let total = this.countTotalFeedback(good, neutral, bad);
     let positivePercentage = this.countPositiveFeedbackPercentage(good, total);
+    let keyState = Object.keys(this.state);
 
       return (
         <>
           <Section title="Please leave feedback">
-            <FeedbackOptions options={'2'}  updateState={this.updateState} /> 
+            <FeedbackOptions options={keyState}  updateState={this.updateState} /> 
           </Section>
           
           <Section title="Statistics" >

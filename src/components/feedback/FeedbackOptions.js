@@ -1,16 +1,17 @@
 import css from './FeedbackOptions.module.css';
 import PropTypes from 'prop-types';
 
-export const FeedbackOptions = ({ updateState }) => {
+export const FeedbackOptions = ({ updateState, options }) => {
     return (
         <>
-            <button className={css.btn} onClick={() => {updateState("good")}}>Good</button>
-            <button className={css.btn} onClick={() => { updateState("neutral") }}>Neutral</button>
-            <button className={css.btn} onClick={() => { updateState("bad") }}>Bad</button>
+            {options.map((item, id) => 
+                <button key={id} className={css.btn} onClick={() => { updateState(item) }}>{item}</button>
+            )}
         </>
     )
 }
 
 FeedbackOptions.propTypes = {
-    updateState: PropTypes.func.isRequired
+    updateState: PropTypes.func.isRequired,
+    options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
 };
